@@ -138,7 +138,7 @@ String parseArrivalTime(String busNum)
   if(predictTime2.equals("") && predictTime1 == "1"){
     return busNum + " : " + predictTime1 + "min";
   }
-    else if(predictTime2.equals("") && predictTime1 != "1"){
+  else if(predictTime2.equals("") && predictTime1 != "1"){
   return busNum + " : " + predictTime1 + "mins";
   }
  
