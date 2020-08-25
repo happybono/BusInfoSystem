@@ -135,7 +135,7 @@ String parseArrivalTime(String busNum)
   endIndex = rcvbuf.indexOf("<", startIndex + strLength);
   String predictTime2 = rcvbuf.substring(startIndex+strLength,endIndex);
 
-  if(predictTime2.equals("") && predictTime1 = "1"){
+  if(predictTime2.equals("") && predictTime1 == "1"){
     return busNum + " : " + predictTime1 + "min";
   }
     else if(predictTime2.equals("") && predictTime1 != "1"){
