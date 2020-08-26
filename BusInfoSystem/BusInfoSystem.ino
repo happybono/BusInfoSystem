@@ -25,9 +25,9 @@ boolean wifi_ready;
 boolean requestLocker = false;
 boolean requestLocker1 = false;
 boolean requestLocker2 = true;
-String result_30_2;
-String result_22;
-String result_55;
+String result_26_1;
+String result_63;
+String result_11_3;
 
 void setup() {
   Serial.begin(9600);
@@ -54,15 +54,15 @@ void loop(){
 
   if(millis() - previousMillis > TSUPD_INTERVAL){
     result_30_2 = parseArrivalTime("26-1");
-    do_oled(0, 11, result_30_2);
-    do_oled(0, 22, result_55);
-    do_oled(0, 33, result_22);
+    do_oled(0, 11, result_26_1);
+    do_oled(0, 22, result_63);
+    do_oled(0, 33, result_11_3);
     requestLocker2 = true;
   }
 
   else if(millis() - previousMillis > TSUPD_INTERVAL - 4000 && requestLocker)
   {
-    result_55 = parseArrivalTime("63");
+    result_63 = parseArrivalTime("63");
     
     // 26-1
     requestArrivalTime("224000027", "224000481");  
@@ -71,7 +71,7 @@ void loop(){
   
   else if(millis() - previousMillis > TSUPD_INTERVAL - 8000 && requestLocker1)
   {
-    result_22 = parseArrivalTime("11-3");
+    result_11_3 = parseArrivalTime("11-3");
 
     // 63
     requestArrivalTime("224000010", "224000481");  
