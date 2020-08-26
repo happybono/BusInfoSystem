@@ -33,9 +33,9 @@ void do_oled(int16_t x, int16_t y, String result) {
   display.drawString(0,0, "Bus No.");
   display.drawString(64,0, "Time Left");
   display.setFont(ArialMT_Plain_10);
-  display.drawString(0,13, result_30_2);
-  display.drawString(0,29, result_55);
-  display.drawString(0,45, result_22);
+  display.drawString(0,13, result_26_1);
+  display.drawString(0,29, result_63);
+  display.drawString(0,45, result_11_3);
   display.display();
   Serial.println(result);
 }
