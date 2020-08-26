@@ -6,7 +6,7 @@ char* ssid = "[Wi-Fi SSID]";
 char* password = "[Wi-Fi Password]";
 
 
-const int TSUPD_INTERVAL = 20000;
+const int GBISUPD_INTERVAL = 20000;
 const char* host = "openapi.gbis.go.kr";
 
 const int httpPort = 80;
@@ -52,7 +52,7 @@ void loop(){
     }
   }
 
-  if(millis() - previousMillis > TSUPD_INTERVAL){
+  if(millis() - previousMillis > GBISUPD_INTERVAL){
     result_26_1 = parseArrivalTime("26-1");
     do_oled(0, 11, result_26_1);
     do_oled(0, 22, result_63);
@@ -60,7 +60,7 @@ void loop(){
     requestLocker2 = true;
   }
 
-  else if(millis() - previousMillis > TSUPD_INTERVAL - 4000 && requestLocker)
+  else if(millis() - previousMillis > GBISUPD_INTERVAL - 4000 && requestLocker)
   {
     result_63 = parseArrivalTime("63");
     
@@ -69,7 +69,7 @@ void loop(){
     requestLocker = false;
   }
   
-  else if(millis() - previousMillis > TSUPD_INTERVAL - 8000 && requestLocker1)
+  else if(millis() - previousMillis > GBISUPD_INTERVAL - 8000 && requestLocker1)
   {
     result_11_3 = parseArrivalTime("11-3");
 
@@ -79,7 +79,7 @@ void loop(){
     requestLocker = true;
   }
 
-  else if(millis() - previousMillis > TSUPD_INTERVAL - 12000 && requestLocker2)
+  else if(millis() - previousMillis > GBISUPD_INTERVAL - 12000 && requestLocker2)
   {
 
     // 11-3
