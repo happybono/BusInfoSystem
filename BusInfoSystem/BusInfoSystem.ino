@@ -53,7 +53,7 @@ void loop(){
   }
 
   if(millis() - previousMillis > TSUPD_INTERVAL){
-    result_30_2 = parseArrivalTime("26-1");
+    result_26_1 = parseArrivalTime("26-1");
     do_oled(0, 11, result_26_1);
     do_oled(0, 22, result_63);
     do_oled(0, 33, result_11_3);
