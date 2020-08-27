@@ -4,6 +4,9 @@ Bus Information System for Gyeonggi Province, South Korea. NodeMCU (ESP8266) has
 ## Schematics
 ![GBusInfoSystem-Schematics](GBusInfoSystem-Schematics.png)
 
+https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15058051
+https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15058837
+
 ## What's New
 <details>
 <summary>Click to Expand</summary>
@@ -18,6 +21,5 @@ Modified variables to consistent with bus route numbers.
 </details>
 
   
-https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15058051
-https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15058837
+
 
