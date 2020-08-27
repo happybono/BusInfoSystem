@@ -4,6 +4,9 @@
 <details>
 <summary>Click to Expand</summary>
 
+## Schematics
+![GBusInfoSystem Schematics](GBusInfoSystem-Schematics.png)
+
 ### v1.0
 #### August 25, 2020  
 Initial release.
@@ -13,6 +16,7 @@ Added Open API document which provided by the Government of South Korea. </br>
 Modified variables to consistent with bus route numbers.
 </details>
 
+  
 https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15058051
 https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15058837
 
