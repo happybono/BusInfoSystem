@@ -22,4 +22,4 @@ Modified variables to consistent with bus route numbers.
 
 
 ## Known Issues
-- Takes long time to load after the first boot. 
+Takes long time to load after the first boot. 
