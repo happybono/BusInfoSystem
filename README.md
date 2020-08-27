@@ -20,6 +20,6 @@ Added Open API document which provided by the Government of South Korea. </br>
 Modified variables to consistent with bus route numbers.
 </details>
 
-  
 
-
+## Known Issues
+- Takes long time to load after the first boot. 
