@@ -1,11 +1,11 @@
 # BusInfoSystem
 
+## Schematics
+![GBusInfoSystem-Schematics](GBusInfoSystem-Schematics.png)
+
 ## What's New
 <details>
 <summary>Click to Expand</summary>
-
-## Schematics
-![GBusInfoSystem Schematics](GBusInfoSystem-Schematics.png)
 
 ### v1.0
 #### August 25, 2020  
