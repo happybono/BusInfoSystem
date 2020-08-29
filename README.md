@@ -18,6 +18,9 @@ Initial release.
 #### August 26, 2020  
 Added Open API document which provided by the Government of South Korea. </br>
 Modified variables to consistent with bus route numbers.
+
+#### August 29, 2020
+Fixed bug : When there is no bus, doesn't clear the variable "rcvbuf".
 </details>
 
 ## Specifications
