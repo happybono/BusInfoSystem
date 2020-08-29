@@ -123,7 +123,8 @@ String parseArrivalTime(String busNum)
 {
   previousMillis = millis();
   int startIndex = rcvbuf.indexOf("<predictTime1>");
-  if(startIndex == -1){
+  if(startIndex == -1){ 
+    rcvbuf = "";
     return busNum + " :     no bus";
   }
 
