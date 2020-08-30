@@ -8,16 +8,6 @@ Bus Information System for Gyeonggi Province, South Korea. NodeMCU (ESP8266) has
 <details>
 <summary>Click to Expand</summary>
 
-## API Keys
-### Bus route inquiry API.
-https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15058051
-- Provides the route ID, route type, and operating area of the route number.
-- Provides a list of stops via which the corresponding line stops, the name of the stop, whether the center lane is located, the turnaround point, and coordinate values.
-
-### Bus arrival information inquiry API.
-https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15058837
-- Provides location information, estimated arrival time, vacant seats, and low-floor bus information of the first and second scheduled buses for a specific route stopping at the corresponding stop
-
 ### v1.0
 #### August 25, 2020  
 Initial release.
@@ -29,6 +19,16 @@ Modified variables to consistent with bus route numbers.
 #### August 29, 2020
 Fixed bug : When there is "no buses in service", doesn't clear the variable "rcvbuf".
 </details>
+
+## API Keys
+### Bus route inquiry API.
+https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15058051
+- Provides the route ID, route type, and operating area of the route number.
+- Provides a list of stops via which the corresponding line stops, the name of the stop, whether the center lane is located, the turnaround point, and coordinate values.
+
+### Bus arrival information inquiry API.
+https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15058837
+- Provides location information, estimated arrival time, vacant seats, and low-floor bus information of the first and second scheduled buses for a specific route stopping at the corresponding stop
 
 ## Specifications
 ### Connections
