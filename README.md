@@ -4,6 +4,9 @@ Bus Information System for Gyeonggi Province, South Korea. NodeMCU (ESP8266) has
 ## Schematics
 ![GBusInfoSystem-Schematics](GBusInfoSystem-Schematics.png)
 
+## What's New
+<details>
+<summary>Click to Expand</summary>
 
 ## API Keys
 ### Bus route inquiry API.
@@ -14,10 +17,6 @@ https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15058051
 ### Bus arrival information inquiry API.
 https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15058837
 - Provides location information, estimated arrival time, vacant seats, and low-floor bus information of the first and second scheduled buses for a specific route stopping at the corresponding stop
-
-## What's New
-<details>
-<summary>Click to Expand</summary>
 
 ### v1.0
 #### August 25, 2020  
