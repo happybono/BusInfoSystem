@@ -43,6 +43,7 @@ https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15058837
 
 ### 0.96" SSD1306 I2C OLED Display
 - Soldering Required
+- D4 : Data, D3 : Clock
 
 ### KOKIRI A-PACK FIXIE 5 (KP-LS50) Portable Battery
 * USB Port : Power
