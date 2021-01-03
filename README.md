@@ -53,6 +53,3 @@ https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15058837
 * Input : DC-5V / 2A
 * Output : DC-5V / 2.1A
 * Capacity : 5000 mAh
-
-## Known Issues
-Takes long time to load after the first boot. 
