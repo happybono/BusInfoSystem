@@ -50,7 +50,7 @@ Fixed bug : When there is "no buses in service", doesn't clear the variable "rcv
   <img src="GBIS_SCHEMDiag.png">
 </p>
 
-## APIs Used.
+## APIs Used
 ### Bus route inquiry API.
 https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15058051
 - Provides the route ID, route type, and operating area of the route number.
