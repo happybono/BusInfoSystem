@@ -1,12 +1,6 @@
 # BusInfoSystem
 Bus Information System for Gyeonggi Province, South Korea. NodeMCU (ESP8266) has been used as main microcontroller unit, estimated arrival time calculated based on the real time bus location data retrieves from the server once 20 seconds. Displays refined information on the OLED Screen. 
 
-## Schematics
-![GBusInfoSystem-Schematics](GBusInfoSystem-Schematics.png)</br></br></br>
-<p align="center">
-  <img src="GBIS_SCHEMDiag.png">
-</p>
-
 ## What's New
 <details>
 <summary>Click to Expand</summary>
@@ -22,6 +16,30 @@ Modified variables to consistent with bus route numbers.
 #### August 29, 2020
 Fixed bug : When there is "no buses in service", doesn't clear the variable "rcvbuf".
 </details>
+
+## Specifications
+### Scenarios
+- Estimated arrival time calculated based on the real time bus location data retrieves from the server once 20 seconds. Displays refined information on the OLED Screen.
+
+### Connections
+* 1 x Micro-USB
+
+### Wireless
+* IEEE 802.11 b/g/n Wi-Fi technology.
+
+## Apparatus (Equipment)
+### Platform
+* NodeMCU ESP8266-12E
+
+### 0.96" SSD1306 I2C OLED Display 
+* Soldering required
+* D3 : Data, D2 : Clock
+
+## Schematics
+![GBusInfoSystem-Schematics](GBusInfoSystem-Schematics.png)</br></br></br>
+<p align="center">
+  <img src="GBIS_SCHEMDiag.png">
+</p>
 
 ## API Keys
 ### Bus route inquiry API.
