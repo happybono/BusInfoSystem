@@ -3,7 +3,9 @@ Bus Information System for Gyeonggi Province, South Korea. NodeMCU (ESP8266) has
 
 ## Schematics
 ![GBusInfoSystem-Schematics](GBusInfoSystem-Schematics.png)</br></br>
-![GBIS_SCHEMDiag.png](GBIS_SCHEMDiag.png)
+<p align="center">
+  <img src="GBIS_SCHEMDiag.png">
+</p>
 
 ## What's New
 <details>
