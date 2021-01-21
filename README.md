@@ -1,6 +1,13 @@
 # BusInfoSystem
 Bus Information System for Gyeonggi Province, South Korea. NodeMCU (ESP8266) has been used as main microcontroller unit, estimated arrival time calculated based on the real time bus location data retrieves from the server once 20 seconds. Displays refined information on the OLED Screen. 
 
+<div align="center">
+<img alt="GitHub Last Commit" src="https://img.shields.io/github/last-commit/happybono/BusInfoSystem"> 
+<img alt="GitHub Repo Size" src="https://img.shields.io/github/repo-size/happybono/BusInfoSystem">
+<img alt="GitHub Repo Languages" src="https://img.shields.io/github/languages/count/happybono/BusInfoSystem">
+<img alt="GitHub Top Languages" src="https://img.shields.io/github/languages/top/HappyBono/BusInfoSystem">
+</div>
+
 ## What's New
 <details>
 <summary>Click to Expand</summary>
