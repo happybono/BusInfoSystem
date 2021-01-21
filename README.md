@@ -22,37 +22,6 @@ Fixed bug : When there is "no buses in service", doesn't clear the variable "rcv
 - Estimated arrival time calculated based on the real time bus location data retrieves from the server once 20 seconds. Displays refined information on the OLED Screen.
 
 ### Connections
-* 1 x Micro-USB
-
-### Wireless
-* IEEE 802.11 b/g/n Wi-Fi technology.
-
-## Apparatus (Equipment)
-### Platform
-* NodeMCU ESP8266-12E
-
-### 0.96" SSD1306 I2C OLED Display 
-* Soldering required
-* D3 : Data, D2 : Clock
-
-## Schematics
-![GBusInfoSystem-Schematics](GBusInfoSystem-Schematics.png)</br></br></br>
-<p align="center">
-  <img src="GBIS_SCHEMDiag.png">
-</p>
-
-## API Keys
-### Bus route inquiry API.
-https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15058051
-- Provides the route ID, route type, and operating area of the route number.
-- Provides a list of stops via which the corresponding line stops, the name of the stop, whether the center lane is located, the turnaround point, and coordinate values.
-
-### Bus arrival information inquiry API.
-https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15058837
-- Provides location information, estimated arrival time, vacant seats, and low-floor bus information of the first and second scheduled buses for a specific route stopping at the corresponding stop
-
-## Specifications
-### Connections
 - 1 x Micro-USB
 
 ### Wireless
@@ -62,9 +31,9 @@ https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15058837
 ### Platform
 - ESP8266 NodeMCU
 
-### 0.96" SSD1306 I2C OLED Display
-- Soldering Required
-- D3 : Data, D4 : Clock
+### 0.96" SSD1306 I2C OLED Display 
+* Soldering required
+* D3 : Data, D4 : Clock
 
 ### KOKIRI A-PACK FIXIE 5 (KP-LS50) Portable Battery
 * USB Port : Power
@@ -74,3 +43,21 @@ https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15058837
 * Input : DC-5V / 2A
 * Output : DC-5V / 2.1A
 * Capacity : 5000 mAh
+
+## Schematics
+![GBusInfoSystem-Schematics](GBusInfoSystem-Schematics.png)</br></br></br>
+<p align="center">
+  <img src="GBIS_SCHEMDiag.png">
+</p>
+
+## APIs Used.
+### Bus route inquiry API.
+https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15058051
+- Provides the route ID, route type, and operating area of the route number.
+- Provides a list of stops via which the corresponding line stops, the name of the stop, whether the center lane is located, the turnaround point, and coordinate values.
+
+### Bus arrival information inquiry API.
+https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15058837
+- Provides location information, estimated arrival time, vacant seats, and low-floor bus information of the first and second scheduled buses for a specific route stopping at the corresponding stop
+
+
