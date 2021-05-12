@@ -1,4 +1,4 @@
-#define serviceKey String ("[GBIS Read API Key]")
+#define serviceKey String ("[Read API Key issued from the data.go.kr]")
  
 //API Key
  
