@@ -22,6 +22,9 @@ Modified variables to consistent with bus route numbers.
 
 #### August 29, 2020
 Fixed bug : When there is "no buses in service", doesn't clear the variable "rcvbuf".
+
+#### May 12, 2021
+Now supports modified API and renewaled endpoint URL.
 </details>
 
 ## Specifications
