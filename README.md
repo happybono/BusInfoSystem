@@ -71,7 +71,7 @@ https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15080666
 https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15080346
 - Provides location information, estimated arrival time, vacant seats, and low-floor bus information of the first and second scheduled buses for a specific route stopping at the corresponding stop
 
-### Data usage
+## Data usage
 718 bytes per an API Call. 
 718 x 3 = 2,154 bytes. (3 bus routes have been used in this project.)
 
