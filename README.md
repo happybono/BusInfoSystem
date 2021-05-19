@@ -62,7 +62,7 @@ Now supports modified API and renewaled endpoint URL.
 </p>
 
 ## Data Usage
-**718 bytes per an API Call.** <br>
+**718 bytes per API Call.** <br>
 718 x 3 = **2,154 bytes. (3 bus routes have been used in this project.)**
 
 86,400 ÷ 20 = **4,320 times API calls in a day.** <br>
