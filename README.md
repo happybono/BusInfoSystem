@@ -67,7 +67,7 @@ Now supports modified API and renewaled endpoint URL.
 
 86,400 ÷ 20 = **4,320 times API calls in a day.** <br>
 4,320 * 2,154 = **9,305,280 bytes**. <br>
-Approximately uses **9.30 MB per a day.** (**280 MB per a month.**)
+Approximately uses **9.30 MB per day.** (**280 MB per month.**)
 
 ## APIs Used
 ### Bus route inquiry API.
