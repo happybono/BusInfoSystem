@@ -61,7 +61,7 @@ Now supports modified API and renewaled endpoint URL.
   <img src="GBIS_SCHEMDiag.png">
 </p>
 
-## Data usage
+## Data Usage
 718 bytes per an API Call. 
 718 x 3 = 2,154 bytes. (3 bus routes have been used in this project.)
 
