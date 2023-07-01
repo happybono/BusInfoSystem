@@ -26,6 +26,9 @@ Fixed bug : When there is "no buses in service", doesn't clear the variable "rcv
 ### v2.0
 #### May 12, 2021
 Now supports modified API and renewaled endpoint URL.
+
+#### July 1, 2023
+Improvements were made to serial logs to display more clearly.
 </details>
 
 ## Specifications
