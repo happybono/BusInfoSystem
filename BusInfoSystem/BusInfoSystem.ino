@@ -7,8 +7,7 @@ char* password = "[Wi-Fi Password]";
  
  
 const int GBISUPD_INTERVAL = 20000;
-const char* host = "apis.data.go.kr";
- 
+const char* gHost = "apis.data.go.kr";
 const int httpPort = 80;
  
 #include <ESP8266WiFi.h>
@@ -89,73 +88,64 @@ void loop(){
   }
  }
  
-void requestArrivalTime(String routeId, String stationId) {
-  String str = "GET /6410000/busarrivalservice/getBusArrivalItem?serviceKey=" + serviceKey + "&routeId=";
+void RequestArrivalTime(String routeId, String stationId) {
+  String str = "GET /6410000/busarrivalservice/getBusArrivalItem?serviceKey=" + gServiceKey + "&routeId=";
   str.concat(routeId);
   str.concat("&stationId=");
   str.concat(stationId);
-  str.concat(" HTTP/1.1\rnHost:apis.data.go.kr\r\nConnection: close\r\n\r\n");
- 
-  if(client.connect(host, httpPort)){
-  Serial.println("connected");
-  Serial.print(str);
-  client.print(str);
-  client.println();
- 
-  cmdSize = str.length();
- 
-  client.println("AT+CIPSTART=\"TCP\",\"apis.data.go.kr\",80");
-  delay(500);
-  client.print("AT+CIPSEND=");
-  delay(500);
-  client.println(cmdSize);
-  delay(500);
-  client.println(str);
+  str.concat(" HTTP/1.1\r\nHost:apis.data.go.kr\r\nConnection: close\r\n\r\n");
+
+  Serial.println("gBus: Attempt connection");
+  Serial.println(str);
+   
+  if (client.connect(gHost, httpPort)) {
+    Serial.println("success");
+    client.print(str);
+    client.println();
+    cmdSize = str.length();
+
+    client.println("AT+CIPSTART=\"TCP\",\"apis.data.go.kr\",80");
+    delay(500);
+    client.print("AT+CIPSEND=");
+    delay(500);
+    client.println(cmdSize);
+    delay(500);
+    client.println(str);
   }
   else {
-    Serial.println("Connection Failed: ");
+    Serial.println("fail");
     return;
   }
 }
- 
- 
-String parseArrivalTime(String busNum)
-{
+
+String ParseArrivalTime(String busNum) {
+  Serial.println("gBus: Parse " + busNum);
+  Serial.println(rcvbuf);
+
   previousMillis = millis();
   int startIndex = rcvbuf.indexOf("<predictTime1>");
-  if(startIndex == -1){ 
+
+  if (startIndex == -1) {
+    Serial.println("no buses in service.");
     rcvbuf = "";
-    return busNum + " :     no bus";
-  }
- 
-  int strLength = strlen("<predictTime1>");
-  int endIndex = rcvbuf.indexOf("<", startIndex + strLength);
-  String predictTime1 = rcvbuf.substring(startIndex+strLength,endIndex);
-  startIndex = rcvbuf.indexOf("<predictTime2>");
-  strLength = strlen("<predictTime2>");
-  endIndex = rcvbuf.indexOf("<", startIndex + strLength);
-  String predictTime2 = rcvbuf.substring(startIndex+strLength,endIndex);
- 
-  if(predictTime2.equals("") && predictTime1 == "1"){
-    return busNum + " : " + predictTime1 + "min";
-  }
-  else if(predictTime2.equals("") && predictTime1 != "1"){
-  return busNum + " : " + predictTime1 + "mins";
+    return busNum + " : No buses in service";
   }
   
-  Serial.println("===========");
-  Serial.println(predictTime1);
-  Serial.println(predictTime2);
-  Serial.println("===========");
-  rcvbuf = "";
-   
-  if (predictTime1 != "1" && predictTime2 != "1") { 
-  return busNum + " :     " + predictTime1 + "mins, " + predictTime2 + "mins";
+  int strLength = strlen("<predictTimeX>");
+  int endIndex = rcvbuf.indexOf("<", startIndex + strLength);
+  String predictTime1 = rcvbuf.substring(startIndex + strLength, endIndex);
+
+  startIndex = rcvbuf.indexOf("<predictTime2>") + strlen("<predictTime2>");
+  endIndex = rcvbuf.indexOf("<", startIndex);
+  String predictTime2 = rcvbuf.substring(startIndex, endIndex);
+
+  if (predictTime2 == "" || predictTime1.toInt() <= 7) {
+    startIndex = rcvbuf.indexOf("<locationNo1>") + strlen("<locationNo1>");
+    endIndex = rcvbuf.indexOf("<", startIndex);
+    String predictStop1 = rcvbuf.substring(startIndex, endIndex);
+
+    return busNum + " : " + (predictTime1 == "1" ? "ARRIV." : predictTime1 + " mins") + (predictStop1 != "" ? " ( " + predictStop1 + (predictStop1 == "1" ? " stop )" : " stops )") : "");
+  } else {
+    return busNum + " : " + (predictTime1 == "1" ? "ARRIV." : predictTime1 + " mins") + (predictTime2 != "" ? " , " + (predictTime2 == "1" ? "ARRIV." : predictTime2 + " mins") : "");
   }
-  else if (predictTime1 == "1" && predictTime2 != "1"){
-  return busNum + " :     " + predictTime1 + "min, " + predictTime2 + "mins";
-  }
-  else if (predictTime1 != "1" && predictTime2 == "1"){
-  return busNum + " :     " + predictTime1 + "mins, " + predictTime2 + "min";
-  }  
 }
