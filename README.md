@@ -21,7 +21,7 @@ Added Open API document which the Government of South Korea provides. </br>
 Modified variables to be consistent with bus route numbers.
 
 #### August 29, 2020
-Fixed bug : When there are "no buses in service," the variable "rcvbuf" is not cleared.
+Bug Fixed : When there are "no buses in service," the variable "rcvbuf" is not cleared.
 
 ### v2.0
 #### May 12, 2021
@@ -29,6 +29,11 @@ Now supports modified API and renewaled endpoint URL.
 
 #### July 1, 2023
 Improvements were made to serial logs to display more clearly.
+
+### v3.0
+#### January 12, 2025
+Now supports modified API and renewaled endpoint URL.
+Bugs fixed.
 </details>
 
 ## Specifications
