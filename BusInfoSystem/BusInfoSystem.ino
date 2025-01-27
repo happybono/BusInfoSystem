@@ -126,7 +126,7 @@ String parseArrivalTime(String busNum)
   int startIndex = rcvbuf.indexOf("<predictTime1>");
   if(startIndex == -1){ 
     rcvbuf = "";
-    return busNum + " :     no bus";
+    return busNum + " : No buses in service";
   }
  
   int strLength = strlen("<predictTime1>");
@@ -136,11 +136,18 @@ String parseArrivalTime(String busNum)
   strLength = strlen("<predictTime2>");
   endIndex = rcvbuf.indexOf("<", startIndex + strLength);
   String predictTime2 = rcvbuf.substring(startIndex+strLength,endIndex);
+
+  if (predictTime1 == "" && predictTime2 == "")
+  {
+    return busNum + " : No buses in service";
+  }
  
   if(predictTime2.equals("") && predictTime1 == "1"){
+    rcvbuf = "";
     return busNum + " : " + predictTime1 + "min";
   }
   else if(predictTime2.equals("") && predictTime1 != "1"){
+  rcvbuf = "";
   return busNum + " : " + predictTime1 + "mins";
   }
   
@@ -151,12 +158,15 @@ String parseArrivalTime(String busNum)
   rcvbuf = "";
    
   if (predictTime1 != "1" && predictTime2 != "1") { 
+  rcvbuf = "";
   return busNum + " :     " + predictTime1 + "mins, " + predictTime2 + "mins";
   }
   else if (predictTime1 == "1" && predictTime2 != "1"){
+  rcvbuf = "";
   return busNum + " :     " + predictTime1 + "min, " + predictTime2 + "mins";
   }
   else if (predictTime1 != "1" && predictTime2 == "1"){
+  rcvbuf = "";
   return busNum + " :     " + predictTime1 + "mins, " + predictTime2 + "min";
   }  
 }
