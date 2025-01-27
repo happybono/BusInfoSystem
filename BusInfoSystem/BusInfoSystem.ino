@@ -44,8 +44,8 @@ void loop(){
   {
     char c = client.read();
     if(c != NULL){
-      if(rcvbuf.length() > 1300)
-        rcvbuf = "";
+      //if(rcvbuf.length() > 1300)
+      //rcvbuf = "";
       rcvbuf += c;
       //Serial.write(c);
       Serial.print(c);
