@@ -89,12 +89,13 @@ void loop(){
   }
  }
  
-void requestArrivalTime(String routeId, String stationId) {
-  String str = "GET /6410000/busarrivalservice/getBusArrivalItem?serviceKey=" + serviceKey + "&routeId=";
+void gBusRequestArrivalTime(String routeId, String stationId) {
+  String str = "GET /6410000/busarrivalservice/v2/getBusArrivalItemv2?serviceKey=" + gServiceKey + "&routeId=";
   str.concat(routeId);
   str.concat("&stationId=");
   str.concat(stationId);
-  str.concat(" HTTP/1.1\rnHost:apis.data.go.kr\r\nConnection: close\r\n\r\n");
+  str.concat("&format=xml");
+  str.concat(" HTTP/1.1\r\nHost:apis.data.go.kr\r\nConnection: close\r\n\r\n");
  
   if(client.connect(host, httpPort)){
   Serial.println("connected");
