@@ -32,7 +32,7 @@ Improvements were made to serial logs to display more clearly.
 
 ### v3.0
 #### January 12, 2025
-Now supports modified API and renewaled endpoint URL.
+Now supports modified API and renewaled endpoint URL. </br>
 Bugs fixed.
 </details>
 
