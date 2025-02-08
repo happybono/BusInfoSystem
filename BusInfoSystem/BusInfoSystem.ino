@@ -8,6 +8,7 @@ WiFiClient client;
 char* ssid = "[Your Wi-Fi SSID]";
 char* password = "[Your Wi-Fi Password]";
  
+
 const int GBISUPD_INTERVAL = 20000;
 const char* gHost = "apis.data.go.kr";
  
@@ -50,8 +51,8 @@ void loop() {
   }
  
   if (millis() - previousMillis > GBISUPD_INTERVAL) {
-    resultBus1 = gBusParseArrivalTime(FormatBusString("30-2"));
-    // resultBus1 = gBusParseArrivalTime(FormatBusString(ExtractBusNum()));
+    //resultBus1 = gBusParseArrivalTime(FormatBusString("30-2"));
+    resultBus1 = gBusParseArrivalTime(FormatBusString(ExtractBusNum()));
     do_oled(0, 11, resultBus1);
     do_oled(0, 22, resultBus2);
     do_oled(0, 33, resultBus3);
@@ -60,8 +61,8 @@ void loop() {
 
   else if (millis() - previousMillis > GBISUPD_INTERVAL - 4000 && requestLocker)
   {
-    resultBus2 = gBusParseArrivalTime(FormatBusString("55"));
-    //resultBus2 = gBusParseArrivalTime(FormatBusString(ExtractBusNum()));
+    //resultBus2 = gBusParseArrivalTime(FormatBusString("55"));
+    resultBus2 = gBusParseArrivalTime(FormatBusString(ExtractBusNum()));
 
     // 30-2
     gBusRequestArrivalTime("224000014", "224000718");
@@ -71,8 +72,8 @@ void loop() {
 
   else if (millis() - previousMillis > GBISUPD_INTERVAL - 8000 && requestLocker1)
   {
-    resultBus3 = gBusParseArrivalTime(FormatBusString("22"));
-    //resultBus3 = gBusParseArrivalTime(FormatBusString(ExtractBusNum()));
+    //resultBus3 = gBusParseArrivalTime(FormatBusString("22"));
+    resultBus3 = gBusParseArrivalTime(FormatBusString(ExtractBusNum()));
 
     // 55
     gBusRequestArrivalTime("216000011", "224000718");
@@ -142,6 +143,18 @@ String FormatBusString(String busStr) {
       return busStr;
   }
 }
+
+String ExtractBusNum() {
+  int startIndex = rcvbuf.indexOf("<routeName>");
+  if (startIndex == -1) {
+    return "";
+  } else {
+    startIndex += strlen("<routeName>");
+    int endIndex = rcvbuf.indexOf("<", startIndex);
+    return rcvbuf.substring(startIndex, endIndex);
+  }
+}
+
 String gBusParseArrivalTime(String busNum) {
   previousMillis = millis();
   int startIndex = rcvbuf.indexOf("<predictTime1>");
