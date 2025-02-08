@@ -34,6 +34,9 @@ Improvements were made to serial logs to display more clearly.
 #### January 12, 2025
 Now supports modified API and renewaled endpoint URL. </br>
 Bugs fixed.
+
+#### February 9, 2025
+Bugs fixed.
 </details>
 
 ## Specifications
