@@ -36,6 +36,8 @@ Now supports modified API and renewaled endpoint URL. </br>
 Bugs fixed.
 
 #### February 9, 2025
+Enhanced the system to dynamically retrieve bus route numbers from the API. </br>
+Improved the system to display an error message if the server fails to respond due to an error. </br>
 Bugs fixed.
 </details>
 
