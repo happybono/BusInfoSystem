@@ -15,7 +15,6 @@ const char* gHost = "apis.data.go.kr";
 const int httpPort = 80;
 
 int cmdSize = 0;
-String busstopID = "224000481"; // Siheung City Hall
  
 String rcvbuf;
 long currentMillis;
