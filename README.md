@@ -36,9 +36,14 @@ Now supports modified API and renewaled endpoint URL. </br>
 Bugs fixed.
 
 #### February 9, 2025
-Enhanced the system to dynamically retrieve bus route numbers from the API. </br>
-Improved the system to display an error message if the server fails to respond due to an error. </br>
+Enhanced the system to retrieve bus route numbers from the API dynamically. </br>
+Improved the Gyeonggi bus information system system to display an error message if the server fails to respond due to an error. </br>
 Bugs fixed.
+
+### v4.0
+#### February 9, 2025
+Now supports Incheon bus information system. </br>
+Improved the Incheon bus information system to display an error message if the server fails to respond due to an error. <br>
 </details>
 
 ## Specifications
