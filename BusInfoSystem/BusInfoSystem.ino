@@ -1,5 +1,6 @@
 //API Key
 #define gServiceKey String ("[Read API Key issued from the data.go.kr]")
+#define iServiceKey String ("[Read API Key issued from the data.go.kr]")
 
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h>
@@ -7,10 +8,11 @@ WiFiClient client;
 
 char* ssid = "[Your Wi-Fi SSID]";
 char* password = "[Your Wi-Fi Password]";
- 
+
 
 const int GBISUPD_INTERVAL = 20000;
 const char* gHost = "apis.data.go.kr";
+const char* iHost = "apis.data.go.kr";
  
 const int httpPort = 80;
 
@@ -49,7 +51,7 @@ void loop() {
     yield();
   }
  
-  if (millis() - previousMillis > GBISUPD_INTERVAL) {
+  if (millis() - previousMillis > BISUPD_INTERVAL) {
     //resultBus1 = gBusParseArrivalTime(FormatBusString("30-2"));
     resultBus1 = gBusParseArrivalTime(FormatBusString(ExtractBusNum()));
     do_oled(0, 11, resultBus1);
@@ -58,7 +60,7 @@ void loop() {
     requestLocker2 = true;
   }
 
-  else if (millis() - previousMillis > GBISUPD_INTERVAL - 4000 && requestLocker)
+  else if (millis() - previousMillis > BISUPD_INTERVAL - 4000 && requestLocker)
   {
     //resultBus2 = gBusParseArrivalTime(FormatBusString("55"));
     resultBus2 = gBusParseArrivalTime(FormatBusString(ExtractBusNum()));
@@ -69,10 +71,10 @@ void loop() {
     requestLocker = false;
   }
 
-  else if (millis() - previousMillis > GBISUPD_INTERVAL - 8000 && requestLocker1)
+  else if (millis() - previousMillis > BISUPD_INTERVAL - 8000 && requestLocker1)
   {
-    //resultBus3 = gBusParseArrivalTime(FormatBusString("22"));
-    resultBus3 = gBusParseArrivalTime(FormatBusString(ExtractBusNum()));
+    resultBus3 = iBusParseArrivalTime(FormatBusString("790"));
+    //resultBus3 = gBusParseArrivalTime(FormatBusString(ExtractBusNum()));
 
     // 55
     gBusRequestArrivalTime("216000011", "224000718");
@@ -81,10 +83,10 @@ void loop() {
     requestLocker = true;
   }
 
-  else if (millis() - previousMillis > GBISUPD_INTERVAL - 12000 && requestLocker2)
+  else if(millis() - previousMillis > BISUPD_INTERVAL - 12000 && requestLocker2)
   {
-    // 22
-    gBusRequestArrivalTime("216000004", "224000718");
+    // 790
+    iBusRequestArrivalTime("168000010", "224000578");
     rcvbuf = "";
     requestLocker2 = false;
     requestLocker1 = true;
@@ -175,7 +177,6 @@ String gBusParseArrivalTime(String busNum) {
     }
   }
 
-
   int strLength = strlen("<predictTimeX>");
   endIndex = rcvbuf.indexOf("<", startIndex + strLength);
   String predictTime1 = rcvbuf.substring(startIndex + strLength, endIndex);
@@ -202,4 +203,85 @@ String gBusParseArrivalTime(String busNum) {
     rcvbuf = "";
     return busNum + " : " + (predictTime1 == "1" ? "ARRIV." : predictTime1 + " mins") + (predictTime2 != "" ? "  ,  " + (predictTime2 == "1" ? "ARRIV." : predictTime2 + " mins") : "");
   }
+}
+
+void iBusRequestArrivalTime(String routeId, String bstopId) {
+  String str = "GET /6280000/busArrivalService/getBusArrivalList?serviceKey=" + iServiceKey + "&pageNo=1&numOfRows=10&routeId=";
+  str.concat(routeId);
+  str.concat("&bstopId=");
+  str.concat(bstopId);
+  str.concat(" HTTP/1.1\r\nHost:apis.data.go.kr\r\nConnection: close\r\n\r\n");
+
+  if (client.connect(iHost, httpPort)) {
+    Serial.println("connected");
+    Serial.print(str);
+    client.print(str);
+    client.println();
+
+    cmdSize = str.length();
+
+    client.println("AT+CIPSTART=\"TCP\",\"apis.data.go.kr\",80");
+    delay(500);
+    client.print("AT+CIPSEND=");
+    delay(500);
+    client.println(cmdSize);
+    delay(500);
+    client.println(str);
+  }
+  else {
+    Serial.println("Connection Failed: ");
+    return;
+  }
+}
+
+String iBusParseArrivalTime(String busNum) {
+  previousMillis = millis();
+  int startIndex = rcvbuf.indexOf("<ARRIVALESTIMATETIME>");
+  int endIndex;
+  String errCode;
+
+  if (startIndex == -1) {
+    startIndex = rcvbuf.indexOf("<returnReasonCode>");
+    if (startIndex == -1) {
+      rcvbuf = "";
+      return busNum + " : No buses in service";
+    } else {
+      startIndex += strlen("<returnReasonCode>");
+      endIndex = rcvbuf.indexOf("<", startIndex);
+
+      errCode = rcvbuf.substring(startIndex, endIndex);
+      rcvbuf = "";
+      return busNum + " : Error Code   ( " + errCode + " )";  // Corrected line
+    }
+  }
+
+  startIndex += strlen("<ARRIVALESTIMATETIME>");
+  endIndex = rcvbuf.indexOf("<", startIndex);
+  String predictTime1 = rcvbuf.substring(startIndex, endIndex);
+
+  startIndex = rcvbuf.indexOf("<REST_STOP_COUNT>") + strlen("<REST_STOP_COUNT>");
+  endIndex = rcvbuf.indexOf("<", startIndex);
+  String predictStop1 = rcvbuf.substring(startIndex, endIndex);
+
+  String predictTime2;
+  int nextStartIndex = rcvbuf.indexOf("<ARRIVALESTIMATETIME>", startIndex);
+  if (nextStartIndex != -1) {
+    nextStartIndex += strlen("<ARRIVALESTIMATETIME>");
+    predictTime2 = rcvbuf.substring(nextStartIndex, rcvbuf.indexOf("<", nextStartIndex));
+  }
+  rcvbuf = "";
+
+  String strDisp;
+  strDisp.concat(busNum + " : ");
+  int timeStr = predictTime1.toInt() / 60;
+  strDisp.concat(timeStr > 1 ? String(timeStr) + " mins" : "ARRIV.");
+  if (predictTime2 != "") {
+    strDisp.concat(String(predictTime2.toInt() / 60) + " mins");
+  } else {
+    if (predictStop1 != "") {
+      strDisp.concat("  ( " + predictStop1 + (predictStop1 == "1" ? " stop )" : " stops )"));
+    }
+  }
+
+  return strDisp;
 }
