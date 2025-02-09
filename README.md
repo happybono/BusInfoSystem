@@ -75,7 +75,7 @@ If the second bus with the same route number (has not departed/is not scheduled)
 * Capacity : 5000 mAh
 
 ## Schematics
-![GBusInfoSystem-Schematics](GBusInfoSystem-Schematics.png)</br></br></br>
+![BusInfoSystem-Schematics](BusInfoSystem-Schematics.png)</br></br></br>
 <p align="center">
   <img src="GBIS_SCHEMDiag.png">
 </p>
