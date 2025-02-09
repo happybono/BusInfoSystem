@@ -83,11 +83,22 @@ Bugs fixed.
 Approximately uses **9.30 MB per day.** (**280 MB per month.**)
 
 ## APIs Used
-### Bus route inquiry API.
+### Gyeonggi bus route inquiry API.
 https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15080666
 - Provides the route ID, route type, and operating area of the route number.
 - Provides a list of stops via which the corresponding line stops, the name of the stop, whether the center lane is located, the turnaround point, and coordinate values.
 
-### Bus arrival information inquiry API.
+### Gyeonggi bus arrival information inquiry API.
 https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15080346
 - Provides location information, estimated arrival time, vacant seats, and low-floor bus information of the first and second scheduled buses for a specific route stopping at the corresponding stop.
+
+### Incheon bus route inquiry API.
+https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15058487
+- Provides the route ID, route type, and operating area of the route number.
+- Provides a list of stops via which the corresponding line stops, the name of the stop, whether the center lane is located, the turnaround point, and coordinate values.
+
+### Incheon bus arrival information inquiry API.
+https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15059084
+- Provides location information, estimated arrival time, vacant seats, and low-floor bus information of the first and second scheduled buses for a specific route stopping at the corresponding stop.
+
+
