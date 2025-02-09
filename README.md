@@ -43,7 +43,8 @@ Bugs fixed.
 ### v4.0
 #### February 9, 2025
 Now supports Incheon bus information system. </br>
-Improved the Incheon bus information system to display an error message if the server fails to respond due to an error. <br>
+Improved the Incheon bus information system to display an error message if the server fails to respond due to an error. </br>
+If the second bus with the same route number (has not departed/is not scheduled) or the first bus to arrive is less than or equal to 7 minutes, the estimated arrival time and the number of remaining stops for the first bus will display on the OLED Screen. </br>
 </details>
 
 ## Specifications
