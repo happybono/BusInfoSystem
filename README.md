@@ -77,7 +77,7 @@ If the second bus with the same route number (has not departed/is not scheduled)
 ## Schematics
 ![BusInfoSystem-Schematics](BusInfoSystem-Schematics.png)</br></br></br>
 <p align="center">
-  <img src="GBIS_SCHEMDiag.png">
+  <img src="BIS_SCHEMDiag.png">
 </p>
 
 ## Data Usage
