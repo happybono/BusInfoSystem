@@ -94,16 +94,16 @@ void loop() {
 }
  
 
-void gBusRequestArrivalTime(String routeId, String stationId) {
+void gBusRequestArrivalTime(String routeId, String bstopId) {
   String str = "GET /6410000/busarrivalservice/v2/getBusArrivalItemv2?serviceKey=" + gServiceKey + "&routeId=";
   str.concat(routeId);
-  str.concat("&stationId=");
-  str.concat(stationId);
+  str.concat("&bstopId=");
+  str.concat(bstopId);
   str.concat("&format=xml");
   str.concat(" HTTP/1.1\r\nHost:apis.data.go.kr\r\nConnection: close\r\n\r\n");
 
   if (client.connect(gHost, httpPort)) {
-    Serial.println("gBusRequest(routeId = " + routeId + ", stationId = " + stationId + " ) -- Connected");
+    Serial.println("gBusRequest(routeId = " + routeId + ", bstopId = " + bstopId + " ) -- Connected");
     Serial.println(str);
     client.print(str);
     client.println();
@@ -119,7 +119,7 @@ void gBusRequestArrivalTime(String routeId, String stationId) {
     client.println(str);
   }
   else {
-    Serial.println("gBusRequest(routeId = " + routeId + ", stationId = " + stationId + ") -- Connection failed ");
+    Serial.println("gBusRequest(routeId = " + routeId + ", bstopId = " + bstopId + ") -- Connection failed ");
     return;
   }
 }
