@@ -48,9 +48,10 @@ If the second bus with the same route number (has not departed/is not scheduled)
 </details>
 
 ## Project Setup
-1. Replace `[Read API Key issued from the data.go.kr]` with your actual API key.
-2. Replace `[Your Wi-Fi SSID]` and `[Your Wi-Fi Password]` with your Wi-Fi credentials.
-3. Upload the code to your ESP8266 module.
+1. Download the required drivers.
+2. Replace `[Read API Key issued from the data.go.kr]` with your actual API key.
+3. Replace `[Your Wi-Fi SSID]` and `[Your Wi-Fi Password]` with your Wi-Fi credentials.
+4. Upload the code to your ESP8266 module.
 
 ## Function Descriptions & Usage
 
