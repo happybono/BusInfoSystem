@@ -101,7 +101,7 @@ void loop() {
 </br>
 
 ### `gBusRequestArrivalTime`
-Sends a GET request to the API to get the arrival time of a specific bus at a specific station.
+Sends a GET request to the API to get the arrival time of a specific bus at a particular station.
 
 #### Parameters
 `routeId (String)` : The route ID of the bus. </br>
@@ -131,7 +131,7 @@ void gBusRequestArrivalTime(String routeId, String stationId) {
 </br>
 
 ### `iBusRequestArrivalTime`
-Sends a GET request to the API to get the arrival time of a specific bus at a specific station.
+Sends a GET request to the API to get the arrival time of a specific bus at a particular station.
 
 #### Parameters
 `routeId (String)` : The route ID of the bus. </br>
@@ -365,7 +365,7 @@ String ExtractBusNum() {
 Approximately uses **9.30 MB per day.** (**280 MB per month.**)
 
 ## Known Issues
-* The Incheon City Bus Arrival Information API only gives details on one arriving bus at a time, so it's not possible to show the expected arrival times for multiple buses on the OLED screen. </br>
+* The Incheon City Bus Arrival Information API only gives details on one arriving bus at a time, so it's impossible to show the expected arrival times for multiple buses on the OLED screen. </br>
 * Since the Incheon City Bus Arrival Information API doesn't provide bus route numbers in its responses, you'll need to hard-code the bus route numbers in the code. </br>
 * In cases where the Wi-Fi or server connection might not be stable, there may be instances when the OLED screen displays the message `No buses in service.` even if a server-related error code is not shown.
 
