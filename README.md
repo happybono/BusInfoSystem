@@ -47,6 +47,282 @@ Improved the Incheon bus information system to display an error message if the s
 If the second bus with the same route number (has not departed/is not scheduled) or the first bus to arrive is less than or equal to 7 minutes, the estimated arrival time and the number of remaining stops for the first bus will display on the OLED Screen. </br>
 </details>
 
+## Project Setup
+1. Replace `[Read API Key issued from the data.go.kr]` with your actual API key.
+2. Replace `[Your Wi-Fi SSID]` and `[Your Wi-Fi Password]` with your Wi-Fi credentials.
+3. Upload the code to your ESP8266 module.
+
+## Function Descriptions & Usage
+
+<details>
+<summary>Click to Expand</summary></br>
+  
+### `setup`
+Initializes the serial communication, OLED display, and Wi-Fi connection.
+
+#### Example
+```c++
+void setup() {
+  Serial.begin(9600);
+  setup_oled();
+  wifi_ready = connect_ap(ssid, password);
+  if (!wifi_ready){
+    nowifi_oled();
+  }
+}
+```
+</br>
+
+### `loop`
+Main loop that checks for client data and updates the bus arrival times at set intervals.
+
+#### Example
+```c++
+void loop() {
+  while (client.available()) {
+    char c = client.read();
+    if (c != NULL) {
+      rcvbuf += c;
+      Serial.print(c);
+    }
+    yield();
+  }
+
+  if (millis() - previousMillis > BISUPD_INTERVAL) {
+    resultBus1 = gBusParseArrivalTime(FormatBusString(ExtractBusNum()));
+    do_oled(0, 11, resultBus1);
+    do_oled(0, 22, resultBus2);
+    do_oled(0, 33, resultBus3);
+    requestLocker2 = true;
+  }
+  // Additional conditions...
+}
+```
+</br>
+
+### `gBusRequestArrivalTime`
+Sends a GET request to the API to get the arrival time of a specific bus at a specific station.
+
+#### Parameters
+`routeId (String)` : The route ID of the bus. </br>
+`bstopId (String)` : The station (bus stop) ID.
+
+#### Example
+```c++
+void gBusRequestArrivalTime(String routeId, String stationId) {
+  String str = "GET /6410000/busarrivalservice/v2/getBusArrivalItemv2?serviceKey=" + gServiceKey + "&routeId=";
+  str.concat(routeId);
+  str.concat("&stationId=");
+  str.concat(stationId);
+  str.concat("&format=xml");
+  str.concat(" HTTP/1.1\r\nHost:apis.data.go.kr\r\nConnection: close\r\n\r\n");
+
+  if (client.connect(gHost, httpPort)) {
+    Serial.println("gBusRequest(routeId = " + routeId + ", stationId = " + stationId + " ) -- Connected");
+    Serial.println(str);
+    client.print(str);
+    client.println();
+    // Additional code...
+  } else {
+    Serial.println("Connection failed");
+  }
+}
+```
+</br>
+
+### `iBusRequestArrivalTime`
+Sends a GET request to the API to get the arrival time of a specific bus at a specific station.
+
+#### Parameters
+`routeId (String)` : The route ID of the bus. </br>
+`bstopId (String)` : The station (bus stop) ID.
+
+#### Example
+```c++
+void iBusRequestArrivalTime(String routeId, String bstopId) {
+  String str = "GET /6280000/busArrivalService/getBusArrivalList?serviceKey=" + iServiceKey + "&pageNo=1&numOfRows=10&routeId=";
+  str.concat(routeId);
+  str.concat("&bstopId=");
+  str.concat(bstopId);
+  str.concat(" HTTP/1.1\r\nHost:apis.data.go.kr\r\nConnection: close\r\n\r\n");
+
+  if (client.connect(iHost, httpPort)) {
+    Serial.println("connected");
+    Serial.print(str);
+    client.print(str);
+    client.println();
+    // Additional code...
+  } else {
+    Serial.println("Connection Failed");
+  }
+}
+```
+</br>
+
+### `gBusParseArrivalTime`
+Parses the arrival time of a general bus from the received buffer string.
+
+#### Parameters
+`busNum (String)` : The bus number.
+
+#### Example
+```c++
+String gBusParseArrivalTime(String busNum) {
+  previousMillis = millis();
+  int startIndex = rcvbuf.indexOf("<predictTime1>");
+  int endIndex;
+  String errCode;
+
+  if (startIndex == -1) {
+    startIndex = rcvbuf.indexOf("<returnReasonCode>");
+    if (startIndex == -1) {
+      rcvbuf = "";
+      return busNum + " : No buses in service";
+    } else {
+      startIndex += strlen("<returnReasonCode>");
+      endIndex = rcvbuf.indexOf("<", startIndex);
+      errCode = rcvbuf.substring(startIndex, endIndex);
+      rcvbuf = "";
+      return busNum + " : Error Code ( " + errCode + " )";
+    }
+  }
+
+  int strLength = strlen("<predictTimeX>");
+  endIndex = rcvbuf.indexOf("<", startIndex + strLength);
+  String predictTime1 = rcvbuf.substring(startIndex + strLength, endIndex);
+
+  startIndex = rcvbuf.indexOf("<predictTime2>") + strlen("<predictTime2>");
+  endIndex = rcvbuf.indexOf("<", startIndex);
+  String predictTime2 = rcvbuf.substring(startIndex, endIndex);
+
+  if (predictTime1 == "" && predictTime2 == "") {
+    return busNum + " : No buses in service";
+  }
+
+  if (predictTime2 == "" || predictTime1.toInt() <= 7) {
+    startIndex = rcvbuf.indexOf("<locationNo1>") + strlen("<locationNo1>");
+    endIndex = rcvbuf.indexOf("<", startIndex);
+    String predictStop1 = rcvbuf.substring(startIndex, endIndex);
+    rcvbuf = "";
+    return busNum + " : " + (predictTime1 == "1" ? "ARRIV." : predictTime1 + " mins") + (predictStop1 != "" ? "  ( " + predictStop1 + (predictStop1 == "1" ? " stop )" : " stops )") : "");
+  } else {
+    rcvbuf = "";
+    return busNum + " : " + (predictTime1 == "1" ? "ARRIV." : predictTime1 + " mins") + (predictTime2 != "" ? "  ,  " + (predictTime2 == "1" ? "ARRIV." : predictTime2 + " mins") : "");
+  }
+}
+```
+</br>
+
+### `iBusParseArrivalTime`
+Parses the arrival time of a general bus from the received buffer string.
+
+#### Parameters
+`busNum (String)` : The bus number.
+
+#### Example
+```c++
+String iBusParseArrivalTime(String busNum) {
+  previousMillis = millis();
+  int startIndex = rcvbuf.indexOf("<ARRIVALESTIMATETIME>");
+  int endIndex;
+  String errCode;
+
+  if (startIndex == -1) {
+    startIndex = rcvbuf.indexOf("<returnReasonCode>");
+    if (startIndex == -1) {
+      rcvbuf = "";
+      return busNum + " : No buses in service";
+    } else {
+      startIndex += strlen("<returnReasonCode>");
+      endIndex = rcvbuf.indexOf("<", startIndex);
+      errCode = rcvbuf.substring(startIndex, endIndex);
+      rcvbuf = "";
+      return busNum + " : Error Code ( " + errCode + " )";
+    }
+  }
+
+  startIndex += strlen("<ARRIVALESTIMATETIME>");
+  endIndex = rcvbuf.indexOf("<", startIndex);
+  String predictTime1 = rcvbuf.substring(startIndex, endIndex);
+
+  startIndex = rcvbuf.indexOf("<REST_STOP_COUNT>") + strlen("<REST_STOP_COUNT>");
+  endIndex = rcvbuf.indexOf("<", startIndex);
+  String predictStop1 = rcvbuf.substring(startIndex, endIndex);
+
+  String predictTime2;
+  int nextStartIndex = rcvbuf.indexOf("<ARRIVALESTIMATETIME>", startIndex);
+  if (nextStartIndex != -1) {
+    nextStartIndex += strlen("<ARRIVALESTIMATETIME>");
+    predictTime2 = rcvbuf.substring(nextStartIndex, rcvbuf.indexOf("<", nextStartIndex));
+  }
+  rcvbuf = "";
+
+  String strDisp;
+  strDisp.concat(busNum + " : ");
+  int timeStr = predictTime1.toInt() / 60;
+  strDisp.concat(timeStr > 1 ? String(timeStr) + " mins" : "ARRIV.");
+  if (predictTime2 != "") {
+    strDisp.concat(String(predictTime2.toInt() / 60) + " mins");
+  } else {
+    if (predictStop1 != "") {
+      strDisp.concat("  ( " + predictStop1 + (predictStop1 == "1" ? " stop )" : " stops )"));
+    }
+  }
+
+  return strDisp;
+}
+```
+</br>
+
+### `FormatBusString`
+Formats the bus number string to a consistent length for display purposes.
+
+#### Parameters
+`busStr (String)` : The bus number string to align center consistently.
+
+#### Example
+```c++
+String FormatBusString(String busStr) {
+  switch (busStr.length()) {
+    case 0:
+      return "    " + busStr + "    ";
+    case 1:
+      return "   " + busStr + "   ";
+    case 2:
+      return "  " + busStr + "  ";
+    case 3:
+      return " " + busStr + " ";
+    case 4:
+      if (busStr.indexOf("-") == -1) {
+        return busStr;
+      } else {
+        return " " + busStr;
+      }
+    default:
+      return busStr;
+  }
+}
+```
+</br>
+
+### `ExtractBusNum`
+Extracts the bus number from the received buffer string.
+
+#### Example
+```c++
+String ExtractBusNum() {
+  int startIndex = rcvbuf.indexOf("<routeName>");
+  if (startIndex == -1) {
+    return "";
+  } else {
+    startIndex += strlen("<routeName>");
+    int endIndex = rcvbuf.indexOf("<", startIndex);
+    return rcvbuf.substring(startIndex, endIndex);
+  }
+}
+```
+</details>
+
 ## Specifications
 ### Scenarios
 - Estimated arrival time calculated based on the real-time bus location data retrieved from the server once every 20 seconds. Displays refined information on the OLED Screen.
