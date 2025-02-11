@@ -1,5 +1,5 @@
 # BusInfoSystem
-Bus Information System for Gyeonggi and Incheon Province, South Korea. NodeMCU (ESP8266) has been used as the main microcontroller unit, estimated arrival time calculated based on the real-time bus location data retrieved from the server once every 20 seconds. Displays refined information on the OLED Screen. 
+Bus Information System for Gyeonggi and Incheon Province, South Korea. NodeMCU (ESP8266) has been used as the main microcontroller unit, estimated arrival time calculated based on the real-time bus location data retrieved from the public data server once every 20 seconds. Displays refined information on the OLED Screen. 
 
 <div align="center">
 <img alt="GitHub Last Commit" src="https://img.shields.io/github/last-commit/happybono/BusInfoSystem"> 
