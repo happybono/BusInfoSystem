@@ -363,7 +363,7 @@ String ExtractBusNum() {
  
 86,400 ÷ 20 = **4,320 times API calls in a day.** </br>
 4,320 * 3,378 = **14,592,960 bytes**. </br>
-Approximately uses **13.91 MB per day.** (**418 MB per month.**)
+Approximately uses **13.92 MB per day.** (**418 MB per month.**)
 
 ## Known Issues
 * The Incheon City Bus Arrival Information API only gives details on one arriving bus at a time, so it's impossible to show the expected arrival times for multiple buses on the OLED screen. </br>
