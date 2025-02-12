@@ -352,10 +352,12 @@ String ExtractBusNum() {
 * Capacity : 5000 mAh
 
 ## Schematics
-![BusInfoSystem-Schematics](BusInfoSystem-Schematics.png)</br></br></br>
-<p align="center">
-  <img src="BIS_SCHEMDiag.png">
-</p>
+![BusInfoSystem-Schematics-Dark](BusInfoSystem-Schematics-Dark.png#gh-dark-mode-only)
+![BusInfoSystem-Schematics-Light](BusInfoSystem-Schematics-Light.png#gh-light-mode-only)
+</br>
+![BIS_SCHEMDiag-Dark](BIS_SCHEMDiag-Dark.png#gh-dark-mode-only)
+![BIS_SCHEMDiag-Light](BIS_SCHEMDiag-Light.png#gh-light-mode-only)
+</br>
 
 ## Data Usage
 **1,126 bytes per API Call.** <br>
