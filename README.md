@@ -354,10 +354,10 @@ String ExtractBusNum() {
 ## Schematics
 ![BusInfoSystem-Schematics-Dark](BusInfoSystem-Schematics-Dark.png#gh-dark-mode-only)
 ![BusInfoSystem-Schematics-Light](BusInfoSystem-Schematics-Light.png#gh-light-mode-only)
-</br>
+</br></br>
 ![BIS_SCHEMDiag-Dark](BIS_SCHEMDiag-Dark.png#gh-dark-mode-only)
 ![BIS_SCHEMDiag-Light](BIS_SCHEMDiag-Light.png#gh-light-mode-only)
-</br>
+</br></br>
 
 ## Data Usage
 **1,126 bytes per API Call.** <br>
