@@ -14,38 +14,38 @@ Bus Information System for Gyeonggi province and Incheon metropolitan city, Sout
 
 ### v1.0
 #### August 25, 2020  
-Initial release.
+> Initial release.
 
 #### August 26, 2020  
-Added Open API document which the Government of South Korea provides. </br>
-Modified variables to be consistent with bus route numbers.
+> Added Open API document which the Government of South Korea provides.<br><br>
+> Modified variables to be consistent with bus route numbers.
 
 #### August 29, 2020
-Bug Fixed : When there are "no buses in service," the variable `rcvbuf` is not cleared.
+> Bug Fixed : When there are "no buses in service," the variable `rcvbuf` is not cleared.
 
 ### v2.0
 #### May 12, 2021
-Now supports modified API and renewaled endpoint URL.
+> Now supports modified API and renewaled endpoint URL.
 
 #### July 1, 2023
-Improvements were made to serial logs to display more clearly.
+> Improvements were made to serial logs to display more clearly.
 
 ### v3.0
 #### January 12, 2025
-Now supports modified API and renewaled endpoint URL. </br>
-Bugs fixed.
+> Now supports modified API and renewaled endpoint URL.<br><br>
+> Bugs fixed.
 
 #### February 9, 2025
-Enhanced the system to retrieve bus route numbers from the API dynamically. </br>
-Improved the Gyeonggi bus information system to display an error message if the server fails to respond due to an error. </br>
-Bugs fixed.
+> Enhanced the system to retrieve bus route numbers from the API dynamically. <br><br>
+> Improved the Gyeonggi bus information system to display an error message if the server fails to respond due to an error. <br><br>
+> Bugs fixed.
 </details>
 
 ### v4.0
 #### February 9, 2025
-Now supports Incheon bus information system. </br>
-Improved the Incheon bus information system to display an error message if the server fails to respond due to an error. </br>
-If the second bus with the same route number (has not departed / is not scheduled) or the first bus to arrive is less than or equal to 7 minutes, the estimated arrival time and the number of remaining stops for the first bus will display on the OLED Screen. </br>
+> Now supports Incheon bus information system. <br><br>
+> Improved the Incheon bus information system to display an error message if the server fails to respond due to an error. <br><br>
+> If the second bus with the same route number (has not departed / is not scheduled) or the first bus to arrive is less than or equal to 7 minutes, the estimated arrival time and the number of remaining stops for the first bus will display on the OLED Screen.
 
 ## Project Setup
 1. Please download and install the necessary drivers and libraries.
