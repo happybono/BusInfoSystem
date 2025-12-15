@@ -21,7 +21,7 @@ Added Open API document which the Government of South Korea provides. </br>
 Modified variables to be consistent with bus route numbers.
 
 #### August 29, 2020
-Bug Fixed : When there are "no buses in service," the variable "rcvbuf" is not cleared.
+Bug Fixed : When there are "no buses in service," the variable `rcvbuf` is not cleared.
 
 ### v2.0
 #### May 12, 2021
@@ -37,7 +37,7 @@ Bugs fixed.
 
 #### February 9, 2025
 Enhanced the system to retrieve bus route numbers from the API dynamically. </br>
-Improved the Gyeonggi bus information system system to display an error message if the server fails to respond due to an error. </br>
+Improved the Gyeonggi bus information system to display an error message if the server fails to respond due to an error. </br>
 Bugs fixed.
 </details>
 
